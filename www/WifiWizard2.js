@@ -679,7 +679,36 @@ cordova.define('wifiwizard2.WifiWizard2', function (require, exports, module) {
 				cordova.exec(resolve, reject, 'WifiWizard2', 'specifierConnection', [SSID, password, wifiConfig.auth.algorithm, wifiConfig.isHiddenSSID]);
 			});
 		},
-	};
+		  /**
+ * Specifier for connect to network with specified SSID and Password
+ * Author: Mathias Scavello (info at mathiasscavello dot com)
+ *
+ * @param {string|int} [SSID]
+ * @param {string} [password=]
+ * @param {string} [alhorithm=OPEN] OPEN|WEP|WPA|WPA2|WPA3
+ * @param {booleab} [isHiddenSSID]
+ * @returns {Promise<any>}
+ */
+  suggestConnection: function (SSID, password, algorithm, isHiddenSSID) {
+    isHiddenSSID = isHiddenSSID ? true : false;
+    algorithm = algorithm ? algorithm : 'NONE';
+
+    return new Promise(function (resolve, reject) {
+      if (!SSID) {
+        reject('SSID is missing!');
+        return;
+      }
+
+      var wifiConfig = WifiWizard2.formatWifiConfig(SSID, password, algorithm, isHiddenSSID);
+
+      if (!wifiConfig) {
+        reject('Algorithm incorrect');
+        return;
+      }
+
+      cordova.exec(resolve, reject, 'WifiWizard2', 'suggestConnection', [SSID, password, wifiConfig.auth.algorithm, wifiConfig.isHiddenSSID]);
+    });
+  },
+};
 
 	module.exports = WifiWizard2;
-});
