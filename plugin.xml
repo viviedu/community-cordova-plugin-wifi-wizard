@@ -38,7 +38,7 @@
             </feature>
         </config-file>
 
-        <source-file src="src/android/wifiwizard2/WifiWizard2.java" target-dir="src/android/wifiwizard2" />
+        <source-file src="src/android/wifiwizard2/WifiWizard2.java" target-dir="src/wifiwizard2" />
     </platform>
 
     <platform name="ios">
