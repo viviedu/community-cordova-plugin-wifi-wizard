@@ -2013,7 +2013,7 @@ public class WifiWizard2 extends CordovaPlugin {
           builder.setWpa2Passphrase(PASS);
         }
 
-        if(Algorithm.matches("/WPA3/gim") && PASS != '')
+        if(Algorithm.matches("/WPA3/gim") && !PASS.isEmpty())
         {
           builder.setWpa3Passphrase(PASS);
         }
