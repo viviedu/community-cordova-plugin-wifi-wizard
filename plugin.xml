@@ -2,22 +2,19 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="cordova-plugin-wifiwizard2"
-        version="3.3.0">
+        id="community-cordova-plugin-wifi-wizard"
+        version="3.4.0">
 
-    <name>WifiWizard2</name>
+    <name>community-cordova-plugin-wifi-wizard</name>
     <description>Cordova Wifi Manager for Android and iOS</description>
     <license>Apache 2.0</license>
     <keywords>cordova,network,wifi,phonegap</keywords>
-    <repo>https://github.com/tripflex/wifiwizard2.git</repo>
+    <repo>https://github.com/EYALIN/community-cordova-plugin-wifi-wizard.git</repo>
     <issue>https://github.com/tripflex/wifiwizard2/issues</issue>
 
     <js-module src="www/WifiWizard2.js" name="WifiWizard2">
         <clobbers target="window.WifiWizard2" />
     </js-module>
-
-    <!-- ES6 promise polyfill -->
-    <dependency id="es6-promise-plugin" version="4.1.0" />
 
     <!-- android -->
     <platform name="android">
@@ -50,7 +47,7 @@
 
         <!-- frameworks -->
         <framework src="NetworkExtension.framework" />
-            
+
         <!-- Add HotspotConfiguration & NetworkExtension Capabilities  -->
         <config-file parent="com.apple.developer.networking.HotspotConfiguration" target="*/Entitlements-Debug.plist">
             <true/>
@@ -70,7 +67,7 @@
         <config-file parent="com.apple.developer.networking.wifi-info" target="*/Entitlements-Release.plist">
                 <true/>
         </config-file>
-            
+
         <header-file src="src/ios/WifiWizard2.h" />
         <source-file src="src/ios/WifiWizard2.m" />
         <framework src="SystemConfiguration.framework" />

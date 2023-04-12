@@ -1,3 +1,9 @@
+[![NPM version](https://img.shields.io/npm/v/community-cordova-plugin-wifi-wizard)](https://www.npmjs.com/package/community-cordova-plugin-wifi-wizard)
+[![Downloads](https://img.shields.io/npm/dm/community-cordova-plugin-wifi-wizard)](https://www.npmjs.com/package/community-cordova-plugin-wifi-wizard)
+
+
+#### This is a fork of the original plugin cordova-plugin-wifiwizard2
+
 # WiFiWizard2 - 3.3.0<!-- omit in toc -->
 
 ## Table of Contents<!-- omit in toc -->
@@ -6,7 +12,7 @@
 - [Basics](#basics)
   - [Async Handling](#async-handling)
   - [Demo Meteor Project](#demo-meteor-project)
-  - [Android and IOS Permissions and Notes](#android-and-ios-permissions-and-notes)
+  - [Android and IOS Permissions and Notes](#android-and-ios-permissions-and- notes)
   - [IOS Notes](#ios-notes)
   - [Ionic/Angular Notes](#ionicangular-notes)
 - [Global Functions](#global-functions)
@@ -565,39 +571,14 @@ WifiWizard2.enable(ssid, bindAll, waitForConnection);
 
 # Installation
 
-## 3.3.0
-
-Run `cordova plugin add https://github.com/matscav/WifiWizard2#dev`
-
 ## Master
-
-Run `cordova plugin add https://github.com/tripflex/WiFiWizard2`
-
-To install from the master branch (latest on GitHub)
-
-To install a specific branch (add `#tag` replacing `tag` with tag from this repo, example:
-`cordova plugin add https://github.com/tripflex/wifiwizard2#v3.2.0`
-
-To install Beta use this branch:
-`cordova plugin add https://github.com/tripflex/wifiwizard2#dev`
-
-Find available tags here:
-https://github.com/tripflex/WifiWizard2/tags
 
 If you are wanting to have the latest and greatest stable version, then run the 'Releases' command below.
 
 ## Releases
 
-Run `cordova plugin add cordova-plugin-wifiwizard2`
+Run `cordova plugin add community-cordova-plugin-wifi-wizard`
 
-## Meteor
-
-To install and use this plugin in a Meteor project, you have to specify the exact version from NPM repository:
-[https://www.npmjs.com/package/cordova-plugin-wifiwizard2](https://www.npmjs.com/package/cordova-plugin-wifiwizard2)
-
-As of XXX, the latest version is 3.2.0:
-
-`meteor add cordova:cordova-plugin-wifiwizard2@3.2.0`
 
 # Errors/Rejections
 
