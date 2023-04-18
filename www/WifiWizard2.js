@@ -707,6 +707,33 @@ var WifiWizard2 = {
       cordova.exec(resolve, reject, 'WifiWizard2', 'suggestConnection', [SSID, password, wifiConfig.auth.algorithm, wifiConfig.isHiddenSSID]);
     });
   },
+  /**
+ * Remove connection from suggestions
+ * Author: Dean Levinson (dean at vivi dot io)
+ *
+ * @param {string|int} [SSID]
+ * @returns {Promise<any>}
+ */
+  removeSuggestedConnection: function (SSID, password, algorithm, isHiddenSSID) {
+    isHiddenSSID = isHiddenSSID ? true : false;
+    algorithm = algorithm ? algorithm : 'NONE';
+
+    return new Promise(function (resolve, reject) {
+      if (!SSID) {
+        reject('SSID is missing!');
+        return;
+      }
+
+      var wifiConfig = WifiWizard2.formatWifiConfig(SSID, password, algorithm, isHiddenSSID);
+
+      if (!wifiConfig) {
+        reject('Algorithm incorrect');
+        return;
+      }
+
+      cordova.exec(resolve, reject, 'WifiWizard2', 'removeSuggestedConnection', [SSID, password, wifiConfig.auth.algorithm, wifiConfig.isHiddenSSID]);
+    });
+  },
 };
 
 module.exports = WifiWizard2;

@@ -72,7 +72,8 @@ public class WifiWizard2 extends CordovaPlugin {
 
   private static final String SPECIFIER_NETWORK = "specifierConnection"; //>=29
   private static final String SUGGEST_NETWORK = "suggestConnection"; //>=29
-  
+  private static final String REMOVE_SUGGESTED_NETWORK = "removeSuggestedConnection"; //>=29
+
   private static final String ADD_NETWORK = "add";
   private static final String REMOVE_NETWORK = "remove";
   private static final String CONNECT_NETWORK = "connect";
@@ -277,6 +278,9 @@ public class WifiWizard2 extends CordovaPlugin {
         return true;
     } else if (action.equals(SUGGEST_NETWORK)) { // API >= 29
         this.suggestConnection(callbackContext, data);
+        return true;
+    } else if (action.equals(REMOVE_SUGGESTED_NETWORK)) { // API >= 29
+        this.removeSuggestedConnection(callbackContext, data);
         return true;
     } else {
       // Check if location is globally enabled (and API 32 or newer)
@@ -2138,6 +2142,71 @@ public class WifiWizard2 extends CordovaPlugin {
         }
 
     }
-  
-  
+  /**
+     *  Suggest one network to connect wifi providing ssid and password
+     *  It connects when system detects the network itself
+     *  Author: Mathias Scavello (info at mathiasscavello dot com)
+     *
+     *  If you not provide pass or algorithm is not set as WPE|WPA|WPA2|WPA3 is represent as default Open network
+     *
+     *  DOC: https://developer.android.com/guide/topics/connectivity/wifi-suggest#java
+     */
+    private void removeSuggestedConnection(CallbackContext callbackContext, JSONArray data) {
+      if (API_VERSION < 29) {
+          callbackContext.error("SUGGESTION_INVALID_API_VERSION");
+          Log.d(TAG, "WifiWizard2: removeSuggestedConnection invalid Android API Version is below as needed.");
+          return;
+      }
+
+      if (!validateData(data)) {
+          callbackContext.error("SUGGESTION_INVALID_DATA");
+          Log.d(TAG, "WifiWizard2: removeSuggestedConnection invalid data.");
+          return;
+      }
+
+      final Context context = cordova.getActivity().getApplicationContext();
+      try {
+          String SSID = data.getString(0);
+          String PASS = data.getString(1);
+          String Algorithm = data.getString(2);
+          Boolean isHidden = data.getBoolean(3);
+
+          WifiNetworkSuggestion.Builder builder = new WifiNetworkSuggestion.Builder();
+          builder.setSsid(SSID);
+          builder.setIsAppInteractionRequired(false);
+
+          if (Algorithm.matches("/WEP|WPA|WPA2/gim") && PASS.length() > 0) {
+              builder.setWpa2Passphrase(PASS);
+          }
+
+          if (Algorithm.matches("/WPA3/gim") && !PASS.isEmpty()) {
+              builder.setWpa3Passphrase(PASS);
+          }
+
+          if (isHidden) {
+              builder.setIsHiddenSsid(true);
+          }
+
+          WifiNetworkSuggestion suggestion = builder.build();
+
+          final List<WifiNetworkSuggestion> suggestionsList = new ArrayList<WifiNetworkSuggestion>();
+          suggestionsList.add(suggestion);
+
+          final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+
+          final int status = wifiManager.removeNetworkSuggestions(suggestionsList);
+          if (status != WifiManager.STATUS_NETWORK_SUGGESTIONS_SUCCESS) {
+              callbackContext.error("STATUS_NETWORK_SUGGESTIONS_ERROR");
+              return;
+          }
+          callbackContext.success("STATUS_NETWORK_SUGGESTIONS_ADDED");
+      } catch (Exception e) {
+          callbackContext.error(e.getMessage());
+          Log.d(TAG, e.getMessage());
+          return;
+      }
+
+  }
+
+
 }
