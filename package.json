@@ -4,8 +4,7 @@
   "cordova": {
     "id": "community-cordova-plugin-wifi-wizard",
     "platforms": [
-      "android",
-      "ios"
+      "android"
     ]
   },
   "author": "EYALIN",

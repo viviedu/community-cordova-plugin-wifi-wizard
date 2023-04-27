@@ -38,39 +38,4 @@
         <source-file src="src/android/wifiwizard2/WifiWizard2.java" target-dir="src/wifiwizard2" />
     </platform>
 
-    <platform name="ios">
-        <config-file target="config.xml" parent="/*">
-            <feature name="WifiWizard2">
-                <param name="ios-package" value="WifiWizard2"/>
-            </feature>
-        </config-file>
-
-        <!-- frameworks -->
-        <framework src="NetworkExtension.framework" />
-
-        <!-- Add HotspotConfiguration & NetworkExtension Capabilities  -->
-        <config-file parent="com.apple.developer.networking.HotspotConfiguration" target="*/Entitlements-Debug.plist">
-            <true/>
-        </config-file>
-        <config-file parent="com.apple.developer.networking.HotspotConfiguration" target="*/Entitlements-Release.plist">
-                 <true/>
-        </config-file>
-        <config-file parent="com.apple.developer.networking.networkextension" target="*/Entitlements-Debug.plist">
-                <array/>
-        </config-file>
-        <config-file parent="com.apple.developer.networking.networkextension" target="*/Entitlements-Release.plist">
-                <array/>
-        </config-file>
-	<config-file parent="com.apple.developer.networking.wifi-info" target="*/Entitlements-Debug.plist">
-                <true/>
-        </config-file>
-        <config-file parent="com.apple.developer.networking.wifi-info" target="*/Entitlements-Release.plist">
-                <true/>
-        </config-file>
-
-        <header-file src="src/ios/WifiWizard2.h" />
-        <source-file src="src/ios/WifiWizard2.m" />
-        <framework src="SystemConfiguration.framework" />
-    </platform>
-
 </plugin>
